@@ -1,7 +1,7 @@
 ENTRY(physical_start)
 
 virtual_base = 0xFFFFFFFF80000000;
-virtual_entrypoint = virtual_base + 0x1000000;
+virtual_entrypoint = virtual_base + 0x100000;
 
 SECTIONS
 {
@@ -18,8 +18,8 @@ SECTIONS
     *(.data)
   }
 
-  .bss ALIGN(0x1000): AT(ADDR(.data) - virtual_base)
+  .bss ALIGN(0x1000): AT(ADDR(.bss) - virtual_base)
   {
-    *(.data)
+    *(.bss)
   }
 }
