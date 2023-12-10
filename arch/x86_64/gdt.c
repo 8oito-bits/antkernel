@@ -1,6 +1,6 @@
 #include "gdt.h"
 
-extern void gdtr_set(unsigned long);
+extern void gdtr_set(u64);
 
 struct gdt_entry gdt[] =
 {
@@ -17,7 +17,7 @@ struct gdt_register gdtr;
 void gdt_load(void)
 {
   gdtr.limit = sizeof(gdt) - 1;
-  gdtr.base = (unsigned long) &gdt;
+  gdtr.base = (u64) &gdt;
 
-  gdtr_set((unsigned long) &gdtr);
+  gdtr_set((u64) &gdtr);
 }
