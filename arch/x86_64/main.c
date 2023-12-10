@@ -6,5 +6,5 @@ int kmain(struct boot_info *info)
 {
   fb_init(info);
   gdt_load();
-  return 1;
+  return 0;
 }
