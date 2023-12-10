@@ -1,10 +1,5 @@
 .code64
 
-.align 4096
-stack_start:
-.byte 16384
-stack_end:
-
 .extern kmain
 .global _start
 
@@ -15,3 +10,9 @@ _start:
   callq kmain
   jmp .
   ret
+
+.section .data
+.align 4096
+
+.comm stack_start, 16384
+stack_end:
