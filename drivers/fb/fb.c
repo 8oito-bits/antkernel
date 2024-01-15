@@ -53,6 +53,9 @@ void fb_init(struct boot_info *info)
   frame_buffer_base = info->mode.frame_buffer_base;
   width = info->mode.horizontal_resolution;
   height = info->mode.vertical_resolution;
+  cursor_x = 0;
+  cursor_y = 0;
 
   color = 0xffffff;
+  fb_write("(!)*");
 }
