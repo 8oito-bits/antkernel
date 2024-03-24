@@ -1,4 +1,10 @@
-int kmain(void)
+#include <ant/boot.h>
+#include <fb/fb.h>
+#include "gdt.h"
+
+int kmain(struct boot_info *info)
 {
-  return 1;
+  fb_init(info);
+  gdt_load();
+  return 0;
 }
