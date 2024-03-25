@@ -5,18 +5,18 @@
 
 #define GDT_ENTRY(limit, base, segment_type, segment_dpl, flags)  \
 { \
-  .llimit = limit & 0xffff, \
-  .hlimit = limit >> 16 & 0xf, \
-  .lbase = base & 0xffff, \
-  .hbase = base >> 16 & 0xff, \
-  .type = segment_type, \
-  .dpl = segment_dpl, \
-  .s = flags & 0x1, \
-  .p = flags >> 0x1 & 0x1, \
-  .avl = 0, \
-  .l = flags >> 0x2 & 0x1, \
-  .db = flags >> 0x3 & 0x1, \
-  .g = flags >> 0x4 & 0x1 \
+  (limit) & 0xffff, \
+  (base) & 0xffff, \
+  segment_type, \
+  (flags) & 0x1, \
+  segment_dpl, \
+  (flags) >> 0x1 & 0x1, \
+  (limit) >> 16 & 0xf, \
+  0, \
+  (flags) >> 0x2 & 0x1, \
+  (flags) >> 0x3 & 0x1, \
+  (flags) >> 0x4 & 0x1, \
+  (base) >> 16 & 0xff \
 }
 
 struct gdt_entry
