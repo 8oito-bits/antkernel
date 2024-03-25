@@ -1,13 +1,13 @@
 .code64
 
-.extern kmain
+.extern init_64
 .global _start
 
 .section .text
 _start:
   cli
   leaq stack_end(%rip), %rsp
-  callq kmain
+  callq init_64
   jmp .
   ret
 
