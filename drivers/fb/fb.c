@@ -3,9 +3,6 @@
 
 static u32 *frame_buffer_base;
 static u32 width, height;
-// Como os objetos estáticos ficam na seção bss e eles são zerados,
-// então, tecnicamente, eu não precisa atribuir zero a eles, mas
-// eu esqueci de zerar a bss na hora de carregar as seções na memória.
 static u16 cursor_x, cursor_y;
 static u32 color;
 
@@ -55,7 +52,4 @@ void fb_init(struct boot_info *info)
   height = info->mode.vertical_resolution;
   cursor_x = 0;
   cursor_y = 0;
-
-  color = 0xffffff;
-  fb_write("(!)*");
 }
