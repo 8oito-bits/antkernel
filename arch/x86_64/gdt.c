@@ -17,7 +17,7 @@ struct gdt_register gdtr;
 void gdt_load(void)
 {
   gdtr.limit = sizeof(gdt) - 1;
-  gdtr.base = (u64) &gdt;
+  gdtr.base = (u64) gdt;
 
   gdtr_set((u64) &gdtr);
 }
