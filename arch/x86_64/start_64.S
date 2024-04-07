@@ -3,7 +3,7 @@
 .extern start64
 .global _start
 
-.section .text
+.section ._start_64.text
 _start:
   cli
   leaq stack_end(%rip), %rsp

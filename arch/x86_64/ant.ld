@@ -10,6 +10,7 @@ SECTIONS
 
   .text ALIGN(0x1000): AT(ADDR(.text) - virtual_base)
   {
+    *(._start_64.text)
     *(.text)
   }
 
