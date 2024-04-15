@@ -1,4 +1,4 @@
-#include "idt.h"
+#include <idt.h>
 #include <fb/fb.h>
 
 struct idt_entry idt[IDT_ENTRIES];
