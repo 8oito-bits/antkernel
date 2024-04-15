@@ -18,6 +18,11 @@ SECTIONS
     *(.data)
   }
 
+  .rodata ALIGN(0x1000): AT(ADDR(.rodata) - virtual_base)
+  {
+    *(.rodata)
+  }
+
   .bss ALIGN(0x1000): AT(ADDR(.bss) - virtual_base)
   {
     *(.bss)
