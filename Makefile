@@ -1,7 +1,8 @@
 KERNEL_NAME=ant_kernel
 
-X86-64_C_SRCS = $(wildcard arch/x86_64/*.c)
-X86-64_ASM_SRCS = $(wildcard arch/x86_64/*.S)
+X86-64_C_SRCS = $(wildcard arch/x86_64/kernel/*.c)
+X86-64_ASM_SRCS = $(wildcard arch/x86_64/kernel/*.S)
+X86-64_INCLUDE = arch/x86_64/include/
 
 X86-64_OBJS = $(X86-64_C_SRCS:.c=.o)
 X86-64_OBJS += $(X86-64_ASM_SRCS:.S=.o)
@@ -15,12 +16,12 @@ DRIVERS_INCLUDE = drivers/
 CC = gcc
 AS = as
 LD = ld
-CFLAGS = -ffreestanding -nostdlib -nostdinc -I $(ANT_INCLUDE) -I $(DRIVERS_INCLUDE)
-LDFLAGS = -T arch/x86_64/ant.ld
+CFLAGS = -ffreestanding -nostdlib -nostdinc -I $(ANT_INCLUDE) -I $(DRIVERS_INCLUDE) -I $(X86-64_INCLUDE)
+LDFLAGS = -T arch/x86_64/kernel/ant.ld
 
 $(KERNEL_NAME): $(X86-64_OBJS) $(DRIVERS_OBJS)
 	$(LD) $(LDFLAGS) $^ -o $@
-	strip $(KERNEL_NAME)
+	#strip $(KERNEL_NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $^
