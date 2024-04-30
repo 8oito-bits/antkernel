@@ -21,7 +21,7 @@ void fb_draw_char(u8 c)
   u16 old_x = x;
   for(i = 0; i < 16; i++)
   {
-    bitmap = font8x8[c - ' '][i];
+    bitmap = font8x16[c - ' '][i];
     for(j = 0; j < 8; j++)
     {
       if(bitmap & (128U >> j))
