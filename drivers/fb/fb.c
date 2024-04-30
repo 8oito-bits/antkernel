@@ -52,4 +52,5 @@ void fb_init(struct boot_info *info)
   height = info->mode.vertical_resolution;
   cursor_x = 0;
   cursor_y = 0;
+  color = 0x33ff00;
 }
