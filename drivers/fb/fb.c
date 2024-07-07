@@ -21,7 +21,13 @@ void fb_draw_char(u8 c)
   u16 old_x = x;
   for(i = 0; i < 16; i++)
   {
-    bitmap = font8x8[c - ' '][i];
+    bitmap = font8x16[c - ' '][i];
+    if(!bitmap)
+    {
+      y++;
+      continue;
+    }
+
     for(j = 0; j < 8; j++)
     {
       if(bitmap & (128U >> j))
@@ -52,4 +58,5 @@ void fb_init(struct boot_info *info)
   height = info->mode.vertical_resolution;
   cursor_x = 0;
   cursor_y = 0;
+  color = 0x33ff00;
 }
