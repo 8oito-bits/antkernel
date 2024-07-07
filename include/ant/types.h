@@ -6,9 +6,16 @@ typedef unsigned short  u16;
 typedef unsigned        u32;
 typedef unsigned long   u64;
 
+typedef u64 uintptr_t;
+
 typedef char  s8;
 typedef short s16;
 typedef int   s32;
 typedef long  s64;
+
+typedef u64 phys_addr_t;
+typedef u64 virt_addr_t;
+
+typedef u64 size_t;
 
 #endif
