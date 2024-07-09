@@ -38,11 +38,11 @@ void fb_draw_char(u8 c)
     no_bitmap = 1;
   }
 
-  for(i = 0; i < 16; i++)
+  for(i = 0; i < FONT_HEIGHT; i++)
   {
     bitmap = font8x16[c - ' '][i];
 
-    for(j = 0; j < 8; j++)
+    for(j = 0; j < FONT_WIDTH; j++)
     {
       if(bitmap & (128U >> j))
         plot_pixel(x, y, no_bitmap ? background_color : foreground_color);
@@ -56,10 +56,13 @@ void fb_draw_char(u8 c)
     y++;
   }
 
-  if(cursor_x != width / 8)
+  if(cursor_x < width / FONT_WIDTH - 1)
     cursor_x++;
   else
+  {
+    cursor_x = 0;
     cursor_y++;
+  }
 }
 
 void fb_write(char *s)
@@ -74,6 +77,6 @@ void fb_init(struct boot_info *info)
   height = info->mode.vertical_resolution;
   cursor_x = 0;
   cursor_y = 0;
-  fb_set_background_color(0x00);
-  fb_set_foreground_color(0xffffff);
+  fb_set_background_color(FB_BLACK_COLOR);
+  fb_set_foreground_color(FB_WHITE_COLOR);
 }
