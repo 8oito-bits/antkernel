@@ -14,17 +14,7 @@ static void plot_pixel(u16 x, u16 y, u32 color)
   frame_buffer_base[y * width + x] = color;
 }
 
-void fb_set_background_color(u32 color)
-{
-  background_color = color;
-}
-
-void fb_set_foreground_color(u32 color)
-{
-  foreground_color = color;
-}
-
-void fb_draw_char(u8 c)
+static void fb_draw_char(u8 c)
 {
   u16 i, j;
   u8 bitmap;
@@ -55,7 +45,22 @@ void fb_draw_char(u8 c)
     x = old_x;
     y++;
   }
+}
 
+void fb_set_background_color(u32 color)
+{
+  background_color = color;
+}
+
+void fb_set_foreground_color(u32 color)
+{
+  foreground_color = color;
+}
+
+void fb_put_char(u8 c)
+{
+  fb_draw_char(c);
+  
   if(cursor_x < width / FONT_WIDTH - 1)
     cursor_x++;
   else
@@ -67,7 +72,7 @@ void fb_draw_char(u8 c)
 
 void fb_write(char *s)
 {
-  while(*s) fb_draw_char(*s++);
+  while(*s) fb_put_char(*s++);
 }
 
 void fb_init(struct boot_info *info)

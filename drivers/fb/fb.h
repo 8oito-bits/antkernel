@@ -10,6 +10,7 @@
 void fb_set_background_color(u32);
 void fb_set_foreground_color(u32);
 void fb_init(struct boot_info *);
+void fb_put_char(u8);
 void fb_write(char *);
 
 #endif
