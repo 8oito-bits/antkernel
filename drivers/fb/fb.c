@@ -76,10 +76,7 @@ void fb_put_char(u8 c)
   if(cursor_x < width / FONT_WIDTH - 1)
     cursor_x++;
   else
-  {
     new_line();
-    cursor_y++;
-  }
 }
 
 void fb_write(char *s)
