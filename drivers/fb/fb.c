@@ -14,6 +14,12 @@ static void plot_pixel(u16 x, u16 y, u32 color)
   frame_buffer_base[y * width + x] = color;
 }
 
+static void new_line(void)
+{
+  cursor_x = 0;
+  cursor_y++;
+}
+
 static void fb_draw_char(u8 c)
 {
   u16 i, j;
@@ -59,13 +65,19 @@ void fb_set_foreground_color(u32 color)
 
 void fb_put_char(u8 c)
 {
+  if(c == '\n')
+  {
+    new_line();
+    return;
+  }
+
   fb_draw_char(c);
   
   if(cursor_x < width / FONT_WIDTH - 1)
     cursor_x++;
   else
   {
-    cursor_x = 0;
+    new_line();
     cursor_y++;
   }
 }
