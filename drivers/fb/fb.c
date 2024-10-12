@@ -53,6 +53,23 @@ static void fb_draw_char(u8 c)
   }
 }
 
+void fb_scrollup(void)
+{
+  u32 *p = frame_buffer_base + width * FONT_HEIGHT;
+
+  cursor_y--;
+  cursor_x = 0;
+
+  size_t i;
+  for(i = 0; i < width * (height - FONT_HEIGHT); i++)
+    frame_buffer_base[i] = p[i];
+
+  p = frame_buffer_base + width * (height - FONT_HEIGHT);
+
+  for(i = 0; i < width * FONT_HEIGHT; i++)
+    p[i] = background_color;
+}
+
 void fb_set_background_color(u32 color)
 {
   background_color = color;
@@ -70,6 +87,9 @@ void fb_put_char(u8 c)
     new_line();
     return;
   }
+
+  if(cursor_y >= height / FONT_HEIGHT)
+    fb_scrollup();
 
   fb_draw_char(c);
   
