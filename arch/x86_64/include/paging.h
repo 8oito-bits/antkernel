@@ -44,9 +44,9 @@ struct pte
   u32 xd: 1; 
 };
 
-typedef struct pde pml4e_t;
-typedef struct pde pdpte_t;
-typedef struct pde pde_t;
+typedef struct pde p4d_t;
+typedef struct pde pud_t;
+typedef struct pde pmd_t;
 typedef struct pte pte_t;
 
 int paging_init(void);

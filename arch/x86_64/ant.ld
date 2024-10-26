@@ -35,4 +35,11 @@ SECTIONS
     *(.bss)
     _end_bss = .;
   }
+
+  .brk ALIGN(0x1000): AT(ADDR(.brk) - virtual_base)
+  {
+    _start_brk = .;
+    . += 16 * 1024;
+    _end_brk = .;
+  }
 }
