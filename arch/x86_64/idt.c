@@ -9,7 +9,6 @@ extern void exception_handler(void);
 
 void handler(void)
 {
-  fb_write("!!!!!!!!!!!");
 }
 
 void idt_load(void)
