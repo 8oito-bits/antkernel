@@ -10,16 +10,29 @@ SECTIONS
 
   .text ALIGN(0x1000): AT(ADDR(.text) - virtual_base)
   {
+    _start_text = .;
     *(.text)
+    _end_text = .;
   }
 
   .data ALIGN(0x1000): AT(ADDR(.data) - virtual_base)
   {
+    _start_data = .;
     *(.data)
+    _end_data = .;
+  }
+
+  .rodata ALIGN(0x1000): AT(ADDR(.rodata) - virtual_base)
+  {
+    _start_rodata = .;
+    *(.rodata)
+    _end_rodata = .;
   }
 
   .bss ALIGN(0x1000): AT(ADDR(.bss) - virtual_base)
   {
+    _start_bss = .;
     *(.bss)
+    _end_bss = .;
   }
 }
