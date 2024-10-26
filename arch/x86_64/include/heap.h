@@ -11,4 +11,5 @@ struct block
   _Bool free;
 };
 
+void heap_init(void);
 #endif
