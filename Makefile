@@ -17,11 +17,11 @@ CC = gcc
 AS = as
 LD = ld
 CFLAGS = -ffreestanding -nostdlib -nostdinc -I $(ANT_INCLUDE) -I $(DRIVERS_INCLUDE) -I $(X86-64_INCLUDE)
-LDFLAGS = -T arch/x86_64/ant.ld
+LDFLAGS = -T arch/x86_64/ant.ld -z noexecstack
 
 $(KERNEL_NAME): $(X86-64_OBJS) $(DRIVERS_OBJS)
 	$(LD) $(LDFLAGS) $^ -o $@
-	#strip $(KERNEL_NAME)
+	strip $(KERNEL_NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $^
