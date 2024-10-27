@@ -74,7 +74,7 @@ void *early_malloc(size_t size)
   return p;
 }
 
-void early_kfree(void *ptr)
+void early_free(void *ptr)
 {
   if(ptr)
   {
