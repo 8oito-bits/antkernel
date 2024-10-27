@@ -7,7 +7,7 @@
 
 int start64(struct boot_info *info)
 {
-  heap_init();
+  early_heap_init();
   paging_init();
   fb_init(info);
   gdt_load();

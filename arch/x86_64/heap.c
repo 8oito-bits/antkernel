@@ -48,7 +48,7 @@ static struct block *search_first_free_block(size_t size)
   return 0;
 }
 
-void *kmalloc(size_t size)
+void *early_malloc(size_t size)
 {
   if(!size)
     return 0;
@@ -74,7 +74,7 @@ void *kmalloc(size_t size)
   return p;
 }
 
-void kfree(void *ptr)
+void early_kfree(void *ptr)
 {
   if(ptr)
   {
@@ -85,7 +85,7 @@ void kfree(void *ptr)
   }
 }
 
-void heap_init(void)
+void early_heap_init(void)
 {
   heap_head = (struct block *)_start_brk;
   

@@ -11,5 +11,7 @@ struct block
   _Bool free;
 };
 
-void heap_init(void);
+void early_heap_init(void);
+void *early_malloc(size_t);
+void early_free(void *);
 #endif
