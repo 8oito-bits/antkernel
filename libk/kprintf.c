@@ -1,10 +1,13 @@
 #include <kprintf.h>
-#include <ant/types.h>
 #include <stdarg.h>
 #include <fb/fb.h>
+#include <stdlib.h>
 
-static void print_int(u64 integer)
+static void print_int(u64 number)
 {
+  char string[22] = {0};
+  itoa(string, number);
+  fb_write(string);
 }
 
 int kprintf(const char *format, ...)
@@ -28,6 +31,8 @@ int kprintf(const char *format, ...)
         case 's':
           fb_write(va_arg(arg, void *));
           break;
+        case 'i':
+          print_int(va_arg(arg, int));
        }
     }
     else
