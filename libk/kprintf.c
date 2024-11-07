@@ -41,9 +41,25 @@ int kprintf(const char *format, ...)
 
   while(*format != '\0')
   {
+    u64 long_arg;
+
     if(*format == '%')
     {
       format++;
+      if(*format == '#')
+      {
+        fb_write("0x");
+        format++;
+      }
+
+      if(*format != 'l')
+        long_arg = va_arg(arg, unsigned);
+      else
+      {
+        long_arg = va_arg(arg, long unsigned);
+        format++;
+      }
+
       switch(*format)
       {
         case '%':
@@ -56,22 +72,13 @@ int kprintf(const char *format, ...)
           fb_write(va_arg(arg, void *));
           break;
         case 'i':
-          print_int(va_arg(arg, int));
+          print_int(long_arg);
           break;
         case 'X':
-          print_hex(va_arg(arg, int), 1);
+          print_hex(long_arg, 1);
           break;
         case 'x':
-          print_hex(va_arg(arg, int), 0);
-          break;
-        case '#':
-          format++;
-          fb_write("0x");
-          if(*format == 'X')
-            print_hex(va_arg(arg, int), 1);
-          else if(*format == 'x')
-            print_hex(va_arg(arg, int), 0);
-
+          print_hex(long_arg, 0);
           break;
        }
     }
