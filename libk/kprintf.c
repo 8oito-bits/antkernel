@@ -7,7 +7,6 @@ static void print_hex(u64 number, _Bool uppercase)
 {
   u8 nibble;
   _Bool zero_num = 0;
-  u64 i;
 
   if(number == 0)
   {
@@ -15,7 +14,8 @@ static void print_hex(u64 number, _Bool uppercase)
     return;
   }
 
-  while(number)
+  size_t i = 16;
+  while(i--)
   {
     nibble = number >> 60 & 0xf;
     number <<= 4;
