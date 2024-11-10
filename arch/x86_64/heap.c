@@ -1,7 +1,7 @@
 #include <heap.h>
 
-extern void *_start_brk;
-extern void *_end_brk;
+extern u64 _start_brk;
+extern u64 _end_brk;
 
 struct block *heap_head;
 
@@ -87,11 +87,11 @@ void early_free(void *ptr)
 
 void early_heap_init(void)
 {
-  heap_head = (struct block *)_start_brk;
+  heap_head = (struct block *) &_start_brk;
   
   list_head_init(&heap_head->head);
   
-  size_t size = _end_brk - _start_brk - sizeof(struct block);
+  size_t size = &_end_brk - &_start_brk - sizeof(struct block);
   struct block *first_block = (struct block *) ((void *) heap_head + size + sizeof(struct block));
   first_block->size = size - sizeof(struct block);
   first_block->free = 1;
