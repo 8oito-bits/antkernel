@@ -8,6 +8,13 @@ static void print_hex(u64 number, _Bool uppercase)
   u8 nibble;
   _Bool zero_num = 0;
   u64 i;
+
+  if(number == 0)
+  {
+    fb_put_char('0');
+    return;
+  }
+
   while(number)
   {
     nibble = number >> 60 & 0xf;
