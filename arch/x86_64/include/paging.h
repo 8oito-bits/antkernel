@@ -48,6 +48,7 @@ typedef struct pde p4d_t;
 typedef struct pde pud_t;
 typedef struct pde pmd_t;
 typedef struct pte pte_t;
+typedef u64 pgt_t;
 
 int paging_init(void);
 
