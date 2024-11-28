@@ -9,8 +9,8 @@
 .section .text
 _start:
   cli
-  movq  $stack_end, %rsp
-  leaq  kernel_p4d(%rip), %rax
+  leaq  stack_end(%rip), %rsp
+  leaq  kernel_table_level_4(%rip), %rax
   movq  %rax, %cr3
   jmp   higher_half_kernel
 higher_half_kernel:
@@ -20,28 +20,25 @@ higher_half_kernel:
 
 .section .data
 
-.global kernel_p4d
 .align 4096
-kernel_p4d:
-  .quad kernel_identity_pud - START_KERNEL + 0x3
+kernel_table_level_4:
+  .quad kernel_identity_table_level_3 - START_KERNEL + 0x3
   .fill 510, 8, 0
-  .quad kernel_pud - START_KERNEL + 0x3
+  .quad kernel_table_level_3 - START_KERNEL + 0x3
 
-.global kernel_pud
 .align 4096
-kernel_pud:
+kernel_table_level_3:
   .fill 510, 8, 0
-  .quad kernel_pmd - START_KERNEL + 0x3
+  .quad kernel_table_level_2 - START_KERNEL + 0x3
   .fill 1, 8, 0
 
 .align 4096
-kernel_identity_pud:
-  .quad kernel_identity_pmd - START_KERNEL + 0x3
+kernel_identity_table_level_3:
+  .quad kernel_identity_table_level_2 - START_KERNEL + 0x3
   .fill 511, 8, 0
 
-.global kernel_pmd
 .align 4096
-kernel_pmd:
+kernel_table_level_2:
   .set i, 0;
   .rept 32
     .quad i | 0x83
@@ -50,7 +47,7 @@ kernel_pmd:
   .fill 480, 8, 0
 
 .align 4096
-kernel_identity_pmd:
+kernel_identity_table_level_2:
   .quad 0x83
   .fill 511, 8, 0
 
