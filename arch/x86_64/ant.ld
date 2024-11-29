@@ -7,6 +7,11 @@ SECTIONS
 {
   . = virtual_entrypoint;
   physical_start = ABSOLUTE(_start - 0xFFFFFFFF80000000);
+  
+  .boot_info ALIGN(0x1000): AT(ADDR(.boot_info) - virtual_base)
+  {
+    . += 4096;
+  }
 
   .text ALIGN(0x1000): AT(ADDR(.text) - virtual_base)
   {
