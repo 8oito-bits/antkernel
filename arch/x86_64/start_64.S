@@ -12,7 +12,8 @@ _start:
   leaq  stack_end(%rip), %rsp
   leaq  kernel_table_level_4(%rip), %rax
   movq  %rax, %cr3
-  jmp   higher_half_kernel
+  movq  $higher_half_kernel, %rax
+  jmp   %rax
 higher_half_kernel:
   callq start64
   jmp .
@@ -40,11 +41,10 @@ kernel_identity_table_level_3:
 .align 4096
 kernel_table_level_2:
   .set i, 0;
-  .rept 32
+  .rept 512
     .quad i | 0x83
     .set i, i + (1 << 21)
   .endr
-  .fill 480, 8, 0
 
 .align 4096
 kernel_identity_table_level_2:
