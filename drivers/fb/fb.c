@@ -1,5 +1,6 @@
 #include "fb.h"
 #include "font.h"
+#include <paging.h>
 
 static u32 *frame_buffer_base;
 static u32 width, height;
@@ -53,6 +54,12 @@ static void fb_draw_char(u8 c)
   }
 }
 
+static void map_frame_buffer(uintptr_t phys_base, void *pte)                                                                          
+{   
+  u64 idx = get_pmd_idx((virt_addr_t) frame_buffer_base); 
+  *((unsigned long *) pte + idx) = (uintptr_t) phys_base + 0x83;                                                                      
+}
+
 void fb_scrollup(void)
 {
   u32 *p = frame_buffer_base + width * FONT_HEIGHT;
@@ -104,13 +111,14 @@ void fb_write(char *s)
   while(*s) fb_put_char(*s++);
 }
 
-void fb_init(struct boot_info *info)
+void fb_init(struct boot_info *info, void *pte)
 {
-  frame_buffer_base = info->mode.frame_buffer_base;
+  frame_buffer_base = (u32 *) FB_VIRTUAL_BASE_ADDR;
   width = info->mode.horizontal_resolution;
   height = info->mode.vertical_resolution;
   cursor_x = 0;
   cursor_y = 0;
   fb_set_background_color(FB_BLACK_COLOR);
   fb_set_foreground_color(FB_WHITE_COLOR);
+  map_frame_buffer((uintptr_t) info->mode.frame_buffer_base, pte);
 }

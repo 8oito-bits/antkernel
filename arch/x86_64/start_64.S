@@ -40,6 +40,7 @@ kernel_identity_table_level_3:
   .fill 511, 8, 0
 
 .align 4096
+.global kernel_table_level_2
 kernel_table_level_2:
   .set i, 0;
   .rept 512

@@ -50,6 +50,7 @@ typedef struct pde pmd_t;
 typedef struct pte pte_t;
 typedef u64 pgt_t;
 
+u64 get_pmd_idx(virt_addr_t virt_addr);
 int paging_init(void);
 
 #endif
