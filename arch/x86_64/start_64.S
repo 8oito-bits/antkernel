@@ -10,7 +10,7 @@
 _start:
   cli
   addq  $START_KERNEL, %rdi
-  leaq  stack_end(%rip), %rsp
+  movq  $stack_end, %rsp
   leaq  kernel_table_level_4(%rip), %rax
   movq  %rax, %cr3
   movq  $higher_half_kernel, %rax
