@@ -13,4 +13,10 @@ gdtr_set:
   pushq %rax
   lretq
 .reload_cs:
+  movw  $0x10, %ax
+  movw  %ax, %ds
+  movw  %ax, %ss
+  movw  %ax, %fs
+  movw  %ax, %gs
+  movw  %ax, %es
   ret
