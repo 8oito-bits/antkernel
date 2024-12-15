@@ -34,13 +34,11 @@ exception_handler:
   iretq
 
 .macro ex_handler error_code
-.global ex_handler_\error_code
-ex_hander_\error_code:
+ex_handler_\error_code:
   jmp exception_handler
 .endm
 
 .macro ex_handler_no_code error_code
-.global ex_handler_no_code_\error_code
 ex_handler_no_code_\error_code:
   pushq $\error_code
   jmp exception_handler
@@ -68,3 +66,28 @@ ex_handler_no_code 18
 ex_handler_no_code 19
 ex_handler_no_code 20
 ex_handler 21
+
+.global ex_handlers
+ex_handlers:
+.quad ex_handler_no_code_0
+.quad ex_handler_no_code_1
+.quad ex_handler_no_code_2
+.quad ex_handler_no_code_3
+.quad ex_handler_no_code_4
+.quad ex_handler_no_code_5
+.quad ex_handler_no_code_6
+.quad ex_handler_no_code_7
+.quad ex_handler_8
+.quad ex_handler_no_code_9
+.quad ex_handler_10
+.quad ex_handler_11
+.quad ex_handler_12
+.quad ex_handler_13
+.quad ex_handler_14
+.quad ex_handler_no_code_15
+.quad ex_handler_no_code_16
+.quad ex_handler_no_code_17 
+.quad ex_handler_no_code_18
+.quad ex_handler_no_code_19
+.quad ex_handler_no_code_20
+.quad ex_handler_21
