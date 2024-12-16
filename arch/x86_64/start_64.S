@@ -3,6 +3,7 @@
 .equ START_KERNEL, 0xFFFFFFFF80000000
 
 .extern start64
+.extern kmain
 .global _start
 
 .align 4096
@@ -17,6 +18,8 @@ _start:
   jmp   %rax
 higher_half_kernel:
   callq start64
+
+  callq kmain
   jmp .
   ret
 
