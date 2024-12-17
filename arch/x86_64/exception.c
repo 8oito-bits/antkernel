@@ -3,5 +3,5 @@
 
 void exception_handler_c(unsigned long error_code)
 {
-  kprintf("Handling exception...\r\n");
+  kprintf("Handling exception %i\n", error_code);
 }

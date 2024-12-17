@@ -5,6 +5,7 @@
 .section .text
 exception_handler:
   pushq %rdi
+  movq  8(%rsp), %rdi
   pushq %rsi
   pushq %rdx
   pushq %rcx
